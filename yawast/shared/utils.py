@@ -23,7 +23,7 @@ def is_url(url):
     try:
         url = extract_url(url)
 
-        if checkers.is_url(url):
+        if checkers.is_url(url, allow_special_ips = True):
             parsed = urlparse(url)
 
             if parsed.scheme == "http" or parsed.scheme == "https":

@@ -97,14 +97,16 @@ def check_cve_2019_11043(session: Session) -> List[Result]:
     base_url = urljoin(session.url, session.args.php_page)
 
     def _get_resp(url: str, qsl: int) -> Response:
-        path_info = "/PHP\nis_the_shittiest_lang.php" # hey, I didn't come up with it...
+        path_info = (
+            "/PHP\nis_the_shittiest_lang.php"
+        )  # hey, I didn't come up with it...
         u = urlparse(url)
         orig_path = quote(u.path)
         new_path = quote(u.path + path_info)
         delta = len(new_path) - len(path_info) - len(orig_path)
-        prime = qsl - delta/2
-        req_url = urljoin(url, new_path + '?' + 'Q' * int(prime))
- 
+        prime = qsl - delta / 2
+        req_url = urljoin(url, new_path + "?" + "Q" * int(prime))
+
         return network.http_get(req_url, False)
 
     res = _get_resp(base_url, 1500)

@@ -146,6 +146,15 @@ def scan(session: Session):
     if res:
         reporter.display_results(res, "\t")
 
+    if (
+        session.args.php_page is not None
+        and len(session.args.php_page) > 0
+    ):
+        with Spinner():
+            res = php.check_cve_2019_11043(session)
+        if res:
+            reporter.display_results(res, "\t")
+
     with Spinner():
         res, jira_path = jira.check_for_jira(session)
     if res:

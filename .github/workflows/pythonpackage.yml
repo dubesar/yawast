@@ -44,7 +44,6 @@ jobs:
     - name: Setup Selenium (Windows)
       if: runner.os == 'Windows'
       run: |
-        choco install chromedriver --version 75.0.3770.1400
         pipenv run echo %PATH%
         pipenv run where chromedriver
       shell: bash {0}

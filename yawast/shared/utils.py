@@ -16,7 +16,7 @@ from yawast.shared import output
 from yawast.shared.exec_timer import ExecutionTimer
 
 INPUT_LOCK = threading.Lock()
-_ansi_strip = re.compile(r"\x1B\[[0-?]*[ -/]*[@-~]")
+ANSI_STRIP = re.compile(r"\x1B\[[0-?]*[ -/]*[@-~]")
 
 
 def is_url(url):
@@ -98,9 +98,9 @@ def is_printable_str(b: bytes) -> bool:
 
 
 def strip_ansi_str(val: str) -> str:
-    global _ansi_strip
+    global ANSI_STRIP
 
-    return _ansi_strip.sub("", val)
+    return ANSI_STRIP.sub("", val)
 
 
 def get_port(url: str) -> int:
